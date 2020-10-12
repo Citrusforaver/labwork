@@ -5,25 +5,25 @@
 
 using namespace std;
 
-void LongIntTests::setValueWithValue()//тестирование метода setValue(int)
+void LongIntTests::setValueWithValue()//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґР° setValue(int)
 
 {
-	LongInt value(123);//под конструктором с параметром скрывается вызов метода setValue(int)
+	LongInt value(123);//РїРѕРґ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРѕРј СЃ РїР°СЂР°РјРµС‚СЂРѕРј СЃРєСЂС‹РІР°РµС‚СЃСЏ РІС‹Р·РѕРІ РјРµС‚РѕРґР° setValue(int)
 
-	if (value.getIsNegative())//если объект поставил отрицательное значение
+	if (value.getIsNegative())//РµСЃР»Рё РѕР±СЉРµРєС‚ РїРѕСЃС‚Р°РІРёР» РѕС‚СЂРёС†Р°С‚РµР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
 		throw exception("Bad sign");
 
-	if (value.getLength() != 3)//если длина числа не равна 3 (т.к. в числе 123 3 цифры)
+	if (value.getLength() != 3)//РµСЃР»Рё РґР»РёРЅР° С‡РёСЃР»Р° РЅРµ СЂР°РІРЅР° 3 (С‚.Рє. РІ С‡РёСЃР»Рµ 123 3 С†РёС„СЂС‹)
 		throw exception("Bad length");
 
-	int real_nums[] = {1,2,3}, *nums = value.getNumbers();//считываем цифры из объекта и сравниваем их с настоящими цифрами
+	int real_nums[] = { 1,2,3 }, * nums = value.getNumbers();//СЃС‡РёС‚С‹РІР°РµРј С†РёС„СЂС‹ РёР· РѕР±СЉРµРєС‚Р° Рё СЃСЂР°РІРЅРёРІР°РµРј РёС… СЃ РЅР°СЃС‚РѕСЏС‰РёРјРё С†РёС„СЂР°РјРё
 	for (int i = 0; i < 3; i++)
 		if (real_nums[i] != nums[i])
 			throw exception("Bad nums");
 
 	delete[] nums;
 
-	//аналогичные действия проделываем с отрицательным числом
+	//Р°РЅР°Р»РѕРіРёС‡РЅС‹Рµ РґРµР№СЃС‚РІРёСЏ РїСЂРѕРґРµР»С‹РІР°РµРј СЃ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј С‡РёСЃР»РѕРј
 	value.setValue(-123);
 
 	if (!value.getIsNegative())
@@ -41,13 +41,13 @@ void LongIntTests::setValueWithValue()//тестирование метода setValue(int)
 
 }
 
-//тестирование метода setValue(int,int*,bool)
+//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґР° setValue(int,int*,bool)
 void LongIntTests::setValueWithArray()
 {
-	//аналогичные действия проделываем с числом, представленным в массиве
+	//Р°РЅР°Р»РѕРіРёС‡РЅС‹Рµ РґРµР№СЃС‚РІРёСЏ РїСЂРѕРґРµР»С‹РІР°РµРј СЃ С‡РёСЃР»РѕРј, РїСЂРµРґСЃС‚Р°РІР»РµРЅРЅС‹Рј РІ РјР°СЃСЃРёРІРµ
 	int valueNums[] = { 1,2,3 };
 
-	LongInt value(3,valueNums,false);
+	LongInt value(3, valueNums, false);
 
 	if (value.getIsNegative())
 		throw exception("Bad sign");
@@ -55,14 +55,14 @@ void LongIntTests::setValueWithArray()
 	if (value.getLength() != 3)
 		throw exception("Bad length");
 
-	int  * nums = value.getNumbers();
+	int* nums = value.getNumbers();
 	for (int i = 0; i < 3; i++)
 		if (valueNums[i] != nums[i])
 			throw exception("Bad nums");
 
 	delete[] nums;
 
-	value.setValue(3, valueNums,true);
+	value.setValue(3, valueNums, true);
 
 	if (!value.getIsNegative())
 		throw exception("Bad sign");
@@ -76,7 +76,7 @@ void LongIntTests::setValueWithArray()
 			throw exception("Bad nums");
 }
 
-//тестирование метода setValue(LongInt)
+//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґР° setValue(LongInt)
 void LongIntTests::setValueWithLongInt()
 {
 	LongInt value1(123), value2;
@@ -97,7 +97,7 @@ void LongIntTests::setValueWithLongInt()
 	delete[] nums2;
 }
 
-//тестирование метода toString()
+//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґР° toString()
 void LongIntTests::toString()
 {
 	LongInt value(123);
@@ -116,14 +116,14 @@ void LongIntTests::toString()
 	str = value.toString();
 	char real_str2[] = { "-123" };
 
-	for (int i = 0; i < value.getLength()+1; i++)
+	for (int i = 0; i < value.getLength() + 1; i++)
 		if (real_str2[i] != str[i])
 			throw exception("Bad string");
 
 	delete[] str;
 }
 
-void LongIntTests::compare()//тестирование метода compare()
+void LongIntTests::compare()//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґР° compare()
 {
 	LongInt value1(100), value2(-100);
 
@@ -157,17 +157,17 @@ void LongIntTests::compare()//тестирование метода compare()
 }
 
 
-void LongIntTests::addition()//тестирование сложения чисел
+void LongIntTests::add()//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃР»РѕР¶РµРЅРёСЏ С‡РёСЃРµР»
 {
-	
-	LongInt value1(100), value2(100);//для данного метода необходимо протестировать только сумму чисел с одинаковыми знаками
+
+	LongInt value1(100), value2(100);//РґР»СЏ РґР°РЅРЅРѕРіРѕ РјРµС‚РѕРґР° РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРѕС‚РµСЃС‚РёСЂРѕРІР°С‚СЊ С‚РѕР»СЊРєРѕ СЃСѓРјРјСѓ С‡РёСЃРµР» СЃ РѕРґРёРЅР°РєРѕРІС‹РјРё Р·РЅР°РєР°РјРё
 
 	LongInt result, excpectation;
 
 	excpectation.setValue(200);
 	result.setValue(value1.addition(value2));
 
-	if (result.compare(excpectation) != 0) // если сумма 100 + 100 не равна 200
+	if (result.compare(excpectation) != 0) // РµСЃР»Рё СЃСѓРјРјР° 100 + 100 РЅРµ СЂР°РІРЅР° 200
 		throw exception("Bad addition");
 
 	value1.setValue(-100);
@@ -175,12 +175,12 @@ void LongIntTests::addition()//тестирование сложения чисел
 	excpectation.setValue(-200);
 	result.setValue(value1.addition(value2));
 
-	if (result.compare(excpectation) != 0)//если сумма (-100)+(-100) не равна -200
+	if (result.compare(excpectation) != 0)//РµСЃР»Рё СЃСѓРјРјР° (-100)+(-100) РЅРµ СЂР°РІРЅР° -200
 		throw exception("Bad addition");
 
 }
 
-void LongIntTests::subtraction()//тестирование вычитания чисел
+void LongIntTests::subtract()//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РІС‹С‡РёС‚Р°РЅРёСЏ С‡РёСЃРµР»
 {
 
 	LongInt value1(100), value2(100);
@@ -190,7 +190,7 @@ void LongIntTests::subtraction()//тестирование вычитания чисел
 	excpectation.setValue(0);
 	result.setValue(value1.subtraction(value2));
 
-	if (result.compare(excpectation) != 0)//если 100-100 не равно 0
+	if (result.compare(excpectation) != 0)//РµСЃР»Рё 100-100 РЅРµ СЂР°РІРЅРѕ 0
 		throw exception("Bad subtraction");
 
 	value1.setValue(-100);
@@ -199,11 +199,11 @@ void LongIntTests::subtraction()//тестирование вычитания чисел
 
 	result.setValue(value1.subtraction(value2));
 
-	if (result.compare(excpectation) != 0)//если сумма (-100)-(-100) не равна 0
+	if (result.compare(excpectation) != 0)//РµСЃР»Рё СЃСѓРјРјР° (-100)-(-100) РЅРµ СЂР°РІРЅР° 0
 		throw exception("Bad subtraction");
 }
 
-void LongIntTests::multiplication()//тестирование умножения чисел
+void LongIntTests::multiplicate()//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СѓРјРЅРѕР¶РµРЅРёСЏ С‡РёСЃРµР»
 {
 	LongInt value1(100), value2(100);
 
@@ -212,7 +212,7 @@ void LongIntTests::multiplication()//тестирование умножения чисел
 	excpectation.setValue(10000);
 	result.setValue(value1.multiplication(value2));
 
-	if (result.compare(excpectation) != 0)//если 100*100 не равно 10000
+	if (result.compare(excpectation) != 0)//РµСЃР»Рё 100*100 РЅРµ СЂР°РІРЅРѕ 10000
 		throw exception("Bad multiplication");
 
 	value1.setValue(-100);
@@ -221,7 +221,7 @@ void LongIntTests::multiplication()//тестирование умножения чисел
 
 	result.setValue(value1.multiplication(value2));
 
-	if (result.compare(excpectation) != 0)//если (-100)*(-100) не равно 10000
+	if (result.compare(excpectation) != 0)//РµСЃР»Рё (-100)*(-100) РЅРµ СЂР°РІРЅРѕ 10000
 		throw exception("Bad multiplication");
 
 	value1.setValue(-100);
@@ -230,7 +230,7 @@ void LongIntTests::multiplication()//тестирование умножения чисел
 
 	result.setValue(value1.multiplication(value2));
 
-	if (result.compare(excpectation) != 0)//если (-100)*100 не равно -10000
+	if (result.compare(excpectation) != 0)//РµСЃР»Рё (-100)*100 РЅРµ СЂР°РІРЅРѕ -10000
 		throw exception("Bad multiplication");
 
 	value1.setValue(100);
@@ -239,12 +239,12 @@ void LongIntTests::multiplication()//тестирование умножения чисел
 
 	result.setValue(value1.multiplication(value2));
 
-	if (result.compare(excpectation) != 0)//если 100*(-100) не равно -10000
+	if (result.compare(excpectation) != 0)//РµСЃР»Рё 100*(-100) РЅРµ СЂР°РІРЅРѕ -10000
 		throw exception("Bad multiplication");
 
 }
 
-void LongIntTests::division()
+void LongIntTests::div()
 {
 	LongInt value1(100), value2(100);
 

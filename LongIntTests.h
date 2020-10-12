@@ -16,13 +16,15 @@ public:
 
 	void compare();
 
-	void addition();
+	void add();
 
-	void subtraction();
+	void subtract();
 
-	void multiplication();
+	void multiplicate();
 
-	void division();
+	void div();
 
 };
+
+
 

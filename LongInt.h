@@ -1,7 +1,7 @@
 #pragma once
 
 
-class LongInt//класс длинный целых
+class LongInt//РєР»Р°СЃСЃ РґР»РёРЅРЅС‹Р№ С†РµР»С‹С…
 {
 
 public:
@@ -30,13 +30,13 @@ public:
 
 	void setIsNegative(bool is_negative);
 
-	LongInt addition(LongInt& value);
+	LongInt add(LongInt& value);
 
-	LongInt subtraction(LongInt& value);
+	LongInt subtract(LongInt& value);
 
-	LongInt multiplication(LongInt& value);
+	LongInt multiplicate(LongInt& value);
 
-	LongInt division(LongInt& value);
+	LongInt div(LongInt& value);
 
 	int compare(LongInt& value);
 
@@ -44,7 +44,7 @@ public:
 
 private:
 
-	int* _numbers;	//массив цифр числа
+	int* _numbers;	//РјР°СЃСЃРёРІ С†РёС„СЂ С‡РёСЃР»Р°
 
 	int _length;
 

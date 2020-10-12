@@ -6,8 +6,8 @@ using namespace std;
 
 LongInt::LongInt()
 {
-	_numbers = nullptr;//устанавливаем нулевой указатель вместо массива для того, чтобы в сеттере не было проблем с очисткой памяти
-	
+	_numbers = nullptr;//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅСѓР»РµРІРѕР№ СѓРєР°Р·Р°С‚РµР»СЊ РІРјРµСЃС‚Рѕ РјР°СЃСЃРёРІР° РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РІ СЃРµС‚С‚РµСЂРµ РЅРµ Р±С‹Р»Рѕ РїСЂРѕР±Р»РµРј СЃ РѕС‡РёСЃС‚РєРѕР№ РїР°РјСЏС‚Рё
+
 	setValue(0);
 }
 
@@ -34,27 +34,27 @@ LongInt::~LongInt()
 	delete[] _numbers;
 }
 
-int* LongInt::getNumbers()//геттер для получения массива цифр числа
+int* LongInt::getNumbers()//РіРµС‚С‚РµСЂ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РјР°СЃСЃРёРІР° С†РёС„СЂ С‡РёСЃР»Р°
 {
-	int* numbersCopy = new int[_length];//создаем копию массива цифр числа
+	int* numbersCopy = new int[_length];//СЃРѕР·РґР°РµРј РєРѕРїРёСЋ РјР°СЃСЃРёРІР° С†РёС„СЂ С‡РёСЃР»Р°
 	for (int i = 0; i < _length; i++)
 		numbersCopy[i] = _numbers[i];
 
 	return numbersCopy;
 }
 
-int LongInt::getLength()//геттер для получения длины числа
+int LongInt::getLength()//РіРµС‚С‚РµСЂ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР»РёРЅС‹ С‡РёСЃР»Р°
 {
 	return _length;
 }
 
-bool LongInt::getIsNegative()//геттер для того, чтобы узнать, является ли число отрицательным
+bool LongInt::getIsNegative()//РіРµС‚С‚РµСЂ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ СѓР·РЅР°С‚СЊ, СЏРІР»СЏРµС‚СЃСЏ Р»Рё С‡РёСЃР»Рѕ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј
 {
 	return _isNegative;
 }
 
 
-void LongInt::setValue(int value)//сеттер для числа
+void LongInt::setValue(int value)//СЃРµС‚С‚РµСЂ РґР»СЏ С‡РёСЃР»Р°
 {
 	delete[] _numbers;
 
@@ -69,7 +69,7 @@ void LongInt::setValue(int value)//сеттер для числа
 		_isNegative = false;
 }
 
-void LongInt::setValue(int length, int* numbers, bool isNegative)//сеттер для массива
+void LongInt::setValue(int length, int* numbers, bool isNegative)//СЃРµС‚С‚РµСЂ РґР»СЏ РјР°СЃСЃРёРІР°
 {
 	if (length < 0)
 		throw exception("Bad length of numbers array!");
@@ -94,7 +94,7 @@ void LongInt::setValue(int length, int* numbers, bool isNegative)//сеттер для ма
 	_isNegative = isNegative;
 }
 
-void LongInt::setValue(const LongInt& value)//сеттер для копирования объекта
+void LongInt::setValue(const LongInt& value)//СЃРµС‚С‚РµСЂ РґР»СЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ РѕР±СЉРµРєС‚Р°
 {
 	_length = value._length;
 	_isNegative = value._isNegative;
@@ -104,20 +104,20 @@ void LongInt::setValue(const LongInt& value)//сеттер для копирования объекта
 		_numbers[i] = value._numbers[i];
 }
 
-void LongInt::setIsNegative(bool is_negative)//изменение знака числа
+void LongInt::setIsNegative(bool is_negative)//РёР·РјРµРЅРµРЅРёРµ Р·РЅР°РєР° С‡РёСЃР»Р°
 {
 	_isNegative = is_negative;
 }
 
 
-LongInt LongInt::addition( LongInt& value)//сложение
+LongInt LongInt::add(LongInt& value)//СЃР»РѕР¶РµРЅРёРµ
 {
 	if (!_isNegative && value._isNegative)
 	{
 		LongInt obj(value);
 		obj.setIsNegative(false);
 
-		return subtraction(obj);
+		return subtract(obj);
 	}
 
 	if (_isNegative && !value._isNegative)
@@ -125,12 +125,12 @@ LongInt LongInt::addition( LongInt& value)//сложение
 		LongInt obj(*this);
 		obj.setIsNegative(false);
 
-		return value.subtraction(obj);
+		return value.subtract(obj);
 	}
 
 	int* numbers;
 	int length;
-	
+
 	if (_length >= value._length)
 	{
 		length = _length;
@@ -138,7 +138,7 @@ LongInt LongInt::addition( LongInt& value)//сложение
 		for (int i = 0; i < _length; i++)
 			numbers[i] = _numbers[i];
 
-		int  i= _length - 1;
+		int  i = _length - 1;
 		for (int j = value._length - 1; j >= 0; j--)
 			numbers[i--] += value._numbers[j];
 	}
@@ -154,8 +154,8 @@ LongInt LongInt::addition( LongInt& value)//сложение
 			numbers[i--] += _numbers[j];
 	}
 
-	int * norm_numbers = normalize(length, numbers);
-	LongInt result(length, norm_numbers,_isNegative);
+	int* norm_numbers = normalize(length, numbers);
+	LongInt result(length, norm_numbers, _isNegative);
 
 	delete[] norm_numbers;
 	delete[] numbers;
@@ -163,7 +163,7 @@ LongInt LongInt::addition( LongInt& value)//сложение
 	return result;
 }
 
-LongInt LongInt::subtraction(LongInt& value)//вычитание
+LongInt LongInt::subtract(LongInt& value)//РІС‹С‡РёС‚Р°РЅРёРµ
 {
 	if (!compare(value))
 		return LongInt();
@@ -173,7 +173,7 @@ LongInt LongInt::subtraction(LongInt& value)//вычитание
 		LongInt obj(value);
 		obj.setIsNegative(false);
 
-		return addition(obj);
+		return add(obj);
 	}
 
 	if (_isNegative && !value._isNegative)
@@ -181,12 +181,12 @@ LongInt LongInt::subtraction(LongInt& value)//вычитание
 		LongInt obj(value);
 		obj.setIsNegative(true);
 
-		return addition(obj);
+		return add(obj);
 	}
 
 	if (compare(value) < 0)
 	{
-		LongInt result(value.subtraction(*this));
+		LongInt result(value.subtract(*this));
 
 		result.setIsNegative(!result.getIsNegative());
 
@@ -228,18 +228,18 @@ LongInt LongInt::subtraction(LongInt& value)//вычитание
 	return result;
 }
 
-LongInt LongInt::multiplication( LongInt& value)//умножение
+LongInt LongInt::multiplicate(LongInt& value)//СѓРјРЅРѕР¶РµРЅРёРµ
 {
 	LongInt result;
 
-	int multiplier = 1;	
-	for (int i = value._length - 1; i >=0; i--)
+	int multiplier = 1;
+	for (int i = value._length - 1; i >= 0; i--)
 	{
 		LongInt temp(*this);
 		temp.setIsNegative(false);
 
 		for (int j = 0; j < value._numbers[i] * multiplier; j++)
-			result.setValue(result.addition(temp));
+			result.setValue(result.add(temp));
 
 		multiplier *= 10;
 	}
@@ -250,9 +250,9 @@ LongInt LongInt::multiplication( LongInt& value)//умножение
 	return result;
 }
 
-LongInt LongInt::division(LongInt& value)//деление
+LongInt LongInt::div(LongInt& value)//РґРµР»РµРЅРёРµ
 {
-	
+
 	LongInt divider(0);
 	if (!value.compare(divider))
 		throw exception("Division by zero!");
@@ -263,29 +263,29 @@ LongInt LongInt::division(LongInt& value)//деление
 	LongInt dividend;
 	dividend.setValue(*this);
 	dividend.setIsNegative(false);
-	
+
 	int result_number = 0;
 	while (dividend.compare(divider) >= 0)
 	{
-		dividend.setValue(dividend.subtraction(divider));
+		dividend.setValue(dividend.subtract(divider));
 		result_number++;
 	}
 
 	if ((_isNegative && !value._isNegative) || (!_isNegative && value._isNegative))
-		result_number*=-1;
+		result_number *= -1;
 
 	return LongInt(result_number);
 }
 
 
-int LongInt::compare(LongInt& value)//сравнение
+int LongInt::compare(LongInt& value)//СЃСЂР°РІРЅРµРЅРёРµ
 {
 	if (_isNegative && !value._isNegative)
 		return -1;
-	
+
 	if (!_isNegative && value._isNegative)
 		return 1;
-	
+
 	if (_length > value._length)
 		if (_isNegative)
 			return -1;
@@ -315,7 +315,7 @@ int LongInt::compare(LongInt& value)//сравнение
 }
 
 
-char* LongInt::toString()//получение стрового представления
+char* LongInt::toString()//РїРѕР»СѓС‡РµРЅРёРµ СЃС‚СЂРѕРІРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ
 {
 	char* str;
 
@@ -341,7 +341,7 @@ char* LongInt::toString()//получение стрового представления
 }
 
 
-int* LongInt::intToArray(int value)//перевод числа в массив цифр
+int* LongInt::intToArray(int value)//РїРµСЂРµРІРѕРґ С‡РёСЃР»Р° РІ РјР°СЃСЃРёРІ С†РёС„СЂ
 {
 	if (value < 0)
 		value *= -1;
@@ -357,7 +357,7 @@ int* LongInt::intToArray(int value)//перевод числа в массив цифр
 
 	int temp = value;
 	int count = 0;
-	
+
 	while (temp)
 	{
 		temp /= 10;
@@ -376,7 +376,7 @@ int* LongInt::intToArray(int value)//перевод числа в массив цифр
 	return numbers;
 }
 
-int* LongInt::normalize(int &length, int * numbers)//нормализация массива
+int* LongInt::normalize(int& length, int* numbers)//РЅРѕСЂРјР°Р»РёР·Р°С†РёСЏ РјР°СЃСЃРёРІР°
 {
 	int* result = new int[length];
 	for (int i = 0; i < length; i++)
@@ -386,12 +386,12 @@ int* LongInt::normalize(int &length, int * numbers)//нормализация массива
 		if (result[i] < 0)
 		{
 			result[i - 1]--;
-			result[i]+=10;
+			result[i] += 10;
 		}
 
 	while (!result[0] && (length != 1))
 	{
-		int* new_result = new int[length -1];
+		int* new_result = new int[length - 1];
 		for (int i = 1; i < length; i++)
 			new_result[i - 1] = result[i];
 
@@ -406,7 +406,7 @@ int* LongInt::normalize(int &length, int * numbers)//нормализация массива
 		result[i] %= 10;
 	}
 
-	while(result[0] >= 10)
+	while (result[0] >= 10)
 	{
 		int* new_result = new int[length + 1];
 		for (int i = length - 1; i >= 0; i--)

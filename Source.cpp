@@ -8,18 +8,18 @@ int main()
 {
 	LongInt obj1(-10230), obj2(133000);
 
-	cout << obj1.addition(obj2).toString() << endl;
+	cout << obj1.add(obj2).toString() << endl;
 
-	cout << obj1.subtraction(obj2).toString() << endl;
+	cout << obj1.subtract(obj2).toString() << endl;
 
-	cout << obj1.multiplication(obj2).toString() << endl;
+	cout << obj1.multiplicate(obj2).toString() << endl;
 
-	cout << obj1.division(obj2).toString() << endl;
+	cout << obj1.div(obj2).toString() << endl;
 
-	
+
 	LongIntTests tester;
-	
-	
+
+
 	try
 	{
 		tester.setValueWithValue();
@@ -64,10 +64,10 @@ int main()
 	{
 		cout << exc.what() << endl;
 	}
-	
+
 	try
 	{
-		tester.addition();
+		tester.add();
 	}
 	catch (const std::exception& exc)
 	{
@@ -76,7 +76,7 @@ int main()
 
 	try
 	{
-		tester.subtraction();
+		tester.subtract();
 	}
 	catch (const std::exception& exc)
 	{
@@ -85,7 +85,7 @@ int main()
 
 	try
 	{
-		tester.multiplication();
+		tester.multiplicate();
 	}
 	catch (const std::exception& exc)
 	{
@@ -94,13 +94,13 @@ int main()
 
 	try
 	{
-		tester.division();
+		tester.div();
 	}
 	catch (const std::exception& exc)
 	{
 		cout << exc.what() << endl;
 	}
-	
+
 
 
 

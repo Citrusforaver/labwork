@@ -6,12 +6,12 @@ using namespace std;
 
 LongInt::LongInt()
 {
-	_numbers = nullptr;//устанавливаем нулевой указатель вместо массива для того, чтобы в сеттере не было проблем с очисткой памяти
+	_numbers = nullptr;//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅСѓР»РµРІРѕР№ СѓРєР°Р·Р°С‚РµР»СЊ РІРјРµСЃС‚Рѕ РјР°СЃСЃРёРІР° РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РІ СЃРµС‚С‚РµСЂРµ РЅРµ Р±С‹Р»Рѕ РїСЂРѕР±Р»РµРј СЃ РѕС‡РёСЃС‚РєРѕР№ РїР°РјСЏС‚Рё
 	
 	setValue(0);
 }
 
-LongInt::LongInt(int value)
+LongInt::LongInt(long long int value)
 {
 	_numbers = nullptr;
 	setValue(value);
@@ -34,27 +34,27 @@ LongInt::~LongInt()
 	delete[] _numbers;
 }
 
-int* LongInt::getNumbers()//геттер для получения массива цифр числа
+int* LongInt::getNumbers()//РіРµС‚С‚РµСЂ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РјР°СЃСЃРёРІР° С†РёС„СЂ С‡РёСЃР»Р°
 {
-	int* numbersCopy = new int[_length];//создаем копию массива цифр числа
+	int* numbersCopy = new int[_length];//СЃРѕР·РґР°РµРј РєРѕРїРёСЋ РјР°СЃСЃРёРІР° С†РёС„СЂ С‡РёСЃР»Р°
 	for (int i = 0; i < _length; i++)
 		numbersCopy[i] = _numbers[i];
 
 	return numbersCopy;
 }
 
-int LongInt::getLength()//геттер для получения длины числа
+int LongInt::getLength()//РіРµС‚С‚РµСЂ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР»РёРЅС‹ С‡РёСЃР»Р°
 {
 	return _length;
 }
 
-bool LongInt::getIsNegative()//геттер для того, чтобы узнать, является ли число отрицательным
+bool LongInt::getIsNegative()//РіРµС‚С‚РµСЂ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ СѓР·РЅР°С‚СЊ, СЏРІР»СЏРµС‚СЃСЏ Р»Рё С‡РёСЃР»Рѕ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј
 {
 	return _isNegative;
 }
 
 
-void LongInt::setValue(int value)//сеттер для числа
+void LongInt::setValue(long long int value)//СЃРµС‚С‚РµСЂ РґР»СЏ С‡РёСЃР»Р°
 {
 	delete[] _numbers;
 
@@ -69,7 +69,7 @@ void LongInt::setValue(int value)//сеттер для числа
 		_isNegative = false;
 }
 
-void LongInt::setValue(int length, int* numbers, bool isNegative)//сеттер для массива
+void LongInt::setValue(int length, int* numbers, bool isNegative)//СЃРµС‚С‚РµСЂ РґР»СЏ РјР°СЃСЃРёРІР°
 {
 	if (length < 0)
 		throw exception("Bad length of numbers array!");
@@ -94,7 +94,7 @@ void LongInt::setValue(int length, int* numbers, bool isNegative)//сеттер для ма
 	_isNegative = isNegative;
 }
 
-void LongInt::setValue(const LongInt& value)//сеттер для копирования объекта
+void LongInt::setValue(const LongInt& value)//СЃРµС‚С‚РµСЂ РґР»СЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ РѕР±СЉРµРєС‚Р°
 {
 	_length = value._length;
 	_isNegative = value._isNegative;
@@ -104,13 +104,13 @@ void LongInt::setValue(const LongInt& value)//сеттер для копирования объекта
 		_numbers[i] = value._numbers[i];
 }
 
-void LongInt::setIsNegative(bool is_negative)//изменение знака числа
+void LongInt::setIsNegative(bool is_negative)//РёР·РјРµРЅРµРЅРёРµ Р·РЅР°РєР° С‡РёСЃР»Р°
 {
 	_isNegative = is_negative;
 }
 
 
-LongInt LongInt::add( LongInt& value)//сложение
+LongInt LongInt::add( LongInt& value)//СЃР»РѕР¶РµРЅРёРµ
 {
 	if (!_isNegative && value._isNegative)
 	{
@@ -163,7 +163,7 @@ LongInt LongInt::add( LongInt& value)//сложение
 	return result;
 }
 
-LongInt LongInt::sub(LongInt& value)//вычитание
+LongInt LongInt::sub(LongInt& value)//РІС‹С‡РёС‚Р°РЅРёРµ
 {
 	if (!compare(value))
 		return LongInt();
@@ -228,7 +228,7 @@ LongInt LongInt::sub(LongInt& value)//вычитание
 	return result;
 }
 
-LongInt LongInt::mult( LongInt& value)//умножение
+LongInt LongInt::mult( LongInt& value)//СѓРјРЅРѕР¶РµРЅРёРµ
 {
 	LongInt result;
 
@@ -250,7 +250,7 @@ LongInt LongInt::mult( LongInt& value)//умножение
 	return result;
 }
 
-LongInt LongInt::div(LongInt& value)//деление
+LongInt LongInt::div(LongInt& value)//РґРµР»РµРЅРёРµ
 {
 	
 	LongInt divider(0);
@@ -278,7 +278,7 @@ LongInt LongInt::div(LongInt& value)//деление
 }
 
 
-int LongInt::compare(LongInt& value)//сравнение
+int LongInt::compare(LongInt& value)//СЃСЂР°РІРЅРµРЅРёРµ
 {
 	if (_isNegative && !value._isNegative)
 		return -1;
@@ -315,7 +315,7 @@ int LongInt::compare(LongInt& value)//сравнение
 }
 
 
-char* LongInt::toString()//получение стрового представления
+char* LongInt::toString()//РїРѕР»СѓС‡РµРЅРёРµ СЃС‚СЂРѕРІРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ
 {
 	char* str;
 
@@ -341,13 +341,16 @@ char* LongInt::toString()//получение стрового представления
 }
 
 
-int* LongInt::intToArray(int value)//перевод числа в массив цифр
+int* LongInt::intToArray(long long int value)
 {
+	//СЃРЅР°С‡Р°Р»Р° РёР·Р±Р°РІР»СЏРµРјСЃСЏ РѕС‚ РјРёРЅСѓСЃР°
 	if (value < 0)
 		value *= -1;
 
+	//РµСЃР»Рё РЅР° РІС…РѕРґ РїСЂРёС€РµР» РЅРѕР»СЊ
 	if (!value)
 	{
+		//С‚Рѕ РµРіРѕ Рё РІРѕР·РІСЂР°С‰Р°РµРј
 		int* numbers = new int[2];
 		numbers[0] = 0;
 		numbers[1] = -1;
@@ -355,15 +358,17 @@ int* LongInt::intToArray(int value)//перевод числа в массив цифр
 		return numbers;
 	}
 
-	int temp = value;
+	long long int temp = value;
 	int count = 0;
-	
+
+	//РёРЅР°С‡Рµ - СЃС‡РёС‚Р°РµРј РєРѕР»-РІРѕ С†РёС„СЂ С‡РёСЃР»Р°
 	while (temp)
 	{
 		temp /= 10;
 		count++;
 	}
 
+	//СЃРѕР·РґР°РµРј РјР°СЃСЃРёРІ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРіРѕ С†РёС„СЂР°РјРё С‡РёСЃР»Р°
 	int* numbers = new int[count + 1];
 	temp = value;
 	for (int i = 0; i < count; i++)
@@ -376,101 +381,55 @@ int* LongInt::intToArray(int value)//перевод числа в массив цифр
 	return numbers;
 }
 
-int* LongInt::normalize(int &length, int * numbers)//нормализация массива
-{
-	int* result = new int[length];
-	for (int i = 0; i < length; i++)
-		result[i] = numbers[i];
 
-	for (int i = length - 1; i >= 1; i--)
-		if (result[i] < 0)
-		{
-			result[i - 1]--;
-			result[i]+=10;
-		}
+//Р›Р°Р±РѕСЂР°С‚РѕСЂРЅР°СЏ СЂР°Р±РѕС‚Р° 2
 
-	while (!result[0] && (length != 1))
-	{
-		int* new_result = new int[length -1];
-		for (int i = 1; i < length; i++)
-			new_result[i - 1] = result[i];
-
-		length--;
-		delete[] result;
-		result = new_result;
-	}
-
-	for (int i = length - 1; i >= 1; i--)
-	{
-		result[i - 1] += result[i] / 10;
-		result[i] %= 10;
-	}
-
-	while(result[0] >= 10)
-	{
-		int* new_result = new int[length + 1];
-		for (int i = length - 1; i >= 0; i--)
-			new_result[i + 1] = result[i];
-
-		new_result[0] = new_result[1] / 10;
-		new_result[1] %= 10;
-		length++;
-		delete[] result;
-		result = new_result;
-	}
-
-	return result;
-}
-
-//Лабораторная работа 2
-
-LongInt LongInt::operator+(LongInt value)//оператор сложения чисел
+LongInt LongInt::operator+(LongInt value)//РѕРїРµСЂР°С‚РѕСЂ СЃР»РѕР¶РµРЅРёСЏ С‡РёСЃРµР»
 {
 	return add(value);
 }
 
-LongInt LongInt::operator-(LongInt value)//оператор вычитания чисел
+LongInt LongInt::operator-(LongInt value)//РѕРїРµСЂР°С‚РѕСЂ РІС‹С‡РёС‚Р°РЅРёСЏ С‡РёСЃРµР»
 {
 	return sub(value);
 }
 
-LongInt LongInt::operator*(int n)//умножение на 10^n
+LongInt LongInt::operator*(int n)//СѓРјРЅРѕР¶РµРЅРёРµ РЅР° 10^n
 {
 	if (n < 0)
 		throw exception("Bad number!");
 
-	int newLength = _length + n;//переносим все цифры из числа в массив цифр результирующего числа
+	//РїРµСЂРµРЅРѕСЃРёРј РІСЃРµ С†РёС„СЂС‹ РёР· С‡РёСЃР»Р° РІ РјР°СЃСЃРёРІ С†РёС„СЂ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РµРіРѕ С‡РёСЃР»Р°
+	int newLength = _length + n;
 	int* newNumbers = new int[newLength];
 	for (int i = 0; i < _length; i++)
 		newNumbers[i] = _numbers[i];
-	for (int i = _length; i < newLength; i++)//в конец числа записываем n нулей
+	//РІ РєРѕРЅРµС† С‡РёСЃР»Р° Р·Р°РїРёСЃС‹РІР°РµРј n РЅСѓР»РµР№
+	for (int i = _length; i < newLength; i++)
 		newNumbers[i] = 0;
 
-	LongInt result(newLength, newNumbers, _isNegative);//формируем число из массива цифр и новой длины
+	//С„РѕСЂРјРёСЂСѓРµРј С‡РёСЃР»Рѕ РёР· РјР°СЃСЃРёРІР° С†РёС„СЂ Рё РЅРѕРІРѕР№ РґР»РёРЅС‹
+	LongInt result(newLength, newNumbers, _isNegative);
 	delete[] newNumbers;
 
 	return result;
 }
 
-LongInt operator*(int n, LongInt value)//умножение на 10^n
+LongInt operator*(int n, LongInt value)//СѓРјРЅРѕР¶РµРЅРёРµ РЅР° 10^n
 {
 	if (n < 0)
 		throw exception("Bad number!");
 
-	int newLength = value._length + n;//переносим все цифры из числа в массив цифр результирующего числа
+	int newLength = value._length + n;//РїРµСЂРµРЅРѕСЃРёРј РІСЃРµ С†РёС„СЂС‹ РёР· С‡РёСЃР»Р° РІ РјР°СЃСЃРёРІ С†РёС„СЂ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РµРіРѕ С‡РёСЃР»Р°
 	int* newNumbers = new int[newLength];
 	for (int i = 0; i < value._length; i++)
 		newNumbers[i] = value._numbers[i];
-	for (int i = value._length; i < newLength; i++)//в конец числа записываем n нулей
+
+	for (int i = value._length; i < newLength; i++)
 		newNumbers[i] = 0;
-
-	LongInt result(newLength, newNumbers, value._isNegative);//формируем число из массива цифр и новой длины
-	delete[] newNumbers;
-
-	return result;
 }
 
-LongInt LongInt::operator/(int n)//деление на 10^n
+LongInt LongInt::operator/(int n)//РґРµР»РµРЅРёРµ РЅР° 10^n
 {
 	if (n < 0)
 		throw exception("Bad number!");
@@ -489,25 +448,25 @@ LongInt LongInt::operator/(int n)//деление на 10^n
 	return result;
 }
 
-LongInt& LongInt::operator=(const LongInt& value)//оператор присваивания
+LongInt& LongInt::operator=(const LongInt& value)//РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 {
 	setValue(value);
 
 	return *this;
 }
 
-LongInt::operator unsigned long int()//оператор приведения типов
+
+LongInt::operator unsigned long int()//РѕРїРµСЂР°С‚РѕСЂ РїСЂРёРІРµРґРµРЅРёСЏ С‚РёРїРѕРІ
 {
-	LongInt maxULong(ULONG_MAX);//создаем длинное число, равное максимальному числу среди unsigned long int
 
-	if (compare(maxULong) < 0)
-	{
-		unsigned long int result = 0, tenDegree = pow(10, (_length - 1));
-		for (int i = 0; i < _length; i++, tenDegree /= 10)
-			result += _numbers[i] * tenDegree;
+	LongInt maxULong(ULONG_MAX);
 
-		return result;
-	}
+	if (compare(maxULong) > 0)
+		throw exception("Overflow");
 
-	return ULONG_MAX;
+	unsigned long int result = 0, tenDegree = pow(10, (_length - 1));
+	for (int i = 0; i < _length; i++, tenDegree /= 10)
+		result += _numbers[i] * tenDegree;
+
+	return result;
 }

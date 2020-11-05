@@ -24,7 +24,7 @@ public:
 
 	void div();
 
-	//лабораторная работа 2:
+	//Р»Р°Р±РѕСЂР°С‚РѕСЂРЅР°СЏ СЂР°Р±РѕС‚Р° 2:
 
 	void multByTenInPowerOperator();
 
@@ -32,7 +32,8 @@ public:
 
 	void assignmentOperator();
 
-	void staticCastOperator();//тестирование приведения к unsigned long int
+	void staticCastOperator();//С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РїСЂРёРІРµРґРµРЅРёСЏ Рє unsigned long int
 
 };
+
 

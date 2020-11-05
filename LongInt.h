@@ -1,14 +1,14 @@
 #pragma once
 
 
-class LongInt//класс длинный целых
+class LongInt//РєР»Р°СЃСЃ РґР»РёРЅРЅС‹Р№ С†РµР»С‹С…
 {
 
 public:
 
 	LongInt();
 
-	LongInt(int value);
+	LongInt(long long int value);
 
 	LongInt(int length, int* numbers, bool isNegative);
 
@@ -22,7 +22,7 @@ public:
 
 	bool getIsNegative();
 
-	void setValue(int value);
+	void setValue(long long int value);
 
 	void setValue(int length, int* numbers, bool isNegative);
 
@@ -42,16 +42,16 @@ public:
 
 	char* toString();
 	
-	//Лабораторная работа 2
-	LongInt operator+(LongInt value);//перергрузка оператора сложения длинных чисел
+	//Р›Р°Р±РѕСЂР°С‚РѕСЂРЅР°СЏ СЂР°Р±РѕС‚Р° 2
+	LongInt operator+(LongInt value);//РїРµСЂРµСЂРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° СЃР»РѕР¶РµРЅРёСЏ РґР»РёРЅРЅС‹С… С‡РёСЃРµР»
 
-	LongInt operator-(LongInt value);//перегрузка оператора вычитания длинных чисел
+	LongInt operator-(LongInt value);//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РІС‹С‡РёС‚Р°РЅРёСЏ РґР»РёРЅРЅС‹С… С‡РёСЃРµР»
 
-	LongInt operator*(int n);//умножение на 10 в степени n
+	LongInt operator*(int n);//СѓРјРЅРѕР¶РµРЅРёРµ РЅР° 10 РІ СЃС‚РµРїРµРЅРё n
 
 	friend LongInt operator*(int n, LongInt value);
 	
-	LongInt operator/(int n);//деление на 10 в степени n
+	LongInt operator/(int n);//РґРµР»РµРЅРёРµ РЅР° 10 РІ СЃС‚РµРїРµРЅРё n
 
 	LongInt& operator=(const LongInt& value);
 
@@ -61,14 +61,15 @@ public:
 
 private:
 
-	int* _numbers;	//массив цифр числа
+	int* _numbers;	//РјР°СЃСЃРёРІ С†РёС„СЂ С‡РёСЃР»Р°
 
 	int _length;
 
 	bool _isNegative;
 
-	int* intToArray(int value);
+	int* intToArray(long long int value);
 
 	int* normalize(int& length, int* numbers);
 };
+
 

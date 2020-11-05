@@ -6,7 +6,8 @@ using namespace std;
 
 int main()
 {
-	LongInt obj1(102), obj2(13300);
+	/*
+	LongInt obj1(10), obj2(100);
 
 	cout << obj1.add(obj2).toString() << endl;
 
@@ -15,7 +16,7 @@ int main()
 	cout << obj1.mult(obj2).toString() << endl;
 
 	cout << obj1.div(obj2).toString() << endl;
-
+	*/
 	LongIntTests tester;
 
 	try
@@ -99,7 +100,7 @@ int main()
 		cout << exc.what() << endl;
 	}
 
-	//Ëàáîðàòîðíàÿ ðàáîòà 2
+	//Ð›Ð°Ð±Ð¾Ñ€Ð°Ñ‚Ð¾Ñ€Ð½Ð°Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ð° 2
 
 	try
 	{

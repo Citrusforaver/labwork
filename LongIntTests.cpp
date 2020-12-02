@@ -16,7 +16,7 @@ void LongIntTests::setValueWithValue()//тестирование метода se
 	if (value.getLength() != 3)//если длина числа не равна 3 (т.к. в числе 123 3 цифры)
 		throw exception("Bad length");
 
-	int real_nums[] = { 1,2,3 }, * nums = value.getNumbers();//считываем цифры из объекта и сравниваем их с настоящими цифрами
+	int real_nums[] = {1,2,3}, *nums = value.getNumbers();//считываем цифры из объекта и сравниваем их с настоящими цифрами
 	for (int i = 0; i < 3; i++)
 		if (real_nums[i] != nums[i])
 			throw exception("Bad nums");
@@ -47,7 +47,7 @@ void LongIntTests::setValueWithArray()
 	//аналогичные действия проделываем с числом, представленным в массиве
 	int valueNums[] = { 1,2,3 };
 
-	LongInt value(3, valueNums, false);
+	LongInt value(3,valueNums,false);
 
 	if (value.getIsNegative())
 		throw exception("Bad sign");
@@ -55,14 +55,14 @@ void LongIntTests::setValueWithArray()
 	if (value.getLength() != 3)
 		throw exception("Bad length");
 
-	int* nums = value.getNumbers();
+	int  * nums = value.getNumbers();
 	for (int i = 0; i < 3; i++)
 		if (valueNums[i] != nums[i])
 			throw exception("Bad nums");
 
 	delete[] nums;
 
-	value.setValue(3, valueNums, true);
+	value.setValue(3, valueNums,true);
 
 	if (!value.getIsNegative())
 		throw exception("Bad sign");
@@ -116,7 +116,7 @@ void LongIntTests::toString()
 	str = value.toString();
 	char real_str2[] = { "-123" };
 
-	for (int i = 0; i < value.getLength() + 1; i++)
+	for (int i = 0; i < value.getLength()+1; i++)
 		if (real_str2[i] != str[i])
 			throw exception("Bad string");
 
@@ -159,13 +159,13 @@ void LongIntTests::compare()//тестирование метода compare()
 
 void LongIntTests::add()//тестирование сложения чисел
 {
-
+	
 	LongInt value1(100), value2(100);//для данного метода необходимо протестировать только сумму чисел с одинаковыми знаками
 
 	LongInt result, excpectation;
 
 	excpectation.setValue(200);
-	result.setValue(value1.addition(value2));
+	result.setValue(value1.add(value2));
 
 	if (result.compare(excpectation) != 0) // если сумма 100 + 100 не равна 200
 		throw exception("Bad addition");
@@ -173,14 +173,14 @@ void LongIntTests::add()//тестирование сложения чисел
 	value1.setValue(-100);
 	value2.setValue(-100);
 	excpectation.setValue(-200);
-	result.setValue(value1.addition(value2));
+	result.setValue(value1.add(value2));
 
 	if (result.compare(excpectation) != 0)//если сумма (-100)+(-100) не равна -200
 		throw exception("Bad addition");
 
 }
 
-void LongIntTests::subtract()//тестирование вычитания чисел
+void LongIntTests::sub()//тестирование вычитания чисел
 {
 
 	LongInt value1(100), value2(100);
@@ -188,7 +188,7 @@ void LongIntTests::subtract()//тестирование вычитания чи�
 	LongInt result, excpectation;
 
 	excpectation.setValue(0);
-	result.setValue(value1.subtraction(value2));
+	result.setValue(value1.sub(value2));
 
 	if (result.compare(excpectation) != 0)//если 100-100 не равно 0
 		throw exception("Bad subtraction");
@@ -197,20 +197,20 @@ void LongIntTests::subtract()//тестирование вычитания чи�
 	value2.setValue(-100);
 	excpectation.setValue(0);
 
-	result.setValue(value1.subtraction(value2));
+	result.setValue(value1.sub(value2));
 
 	if (result.compare(excpectation) != 0)//если сумма (-100)-(-100) не равна 0
 		throw exception("Bad subtraction");
 }
 
-void LongIntTests::multiplicate()//тестирование умножения чисел
+void LongIntTests::mult()//тестирование умножения чисел
 {
 	LongInt value1(100), value2(100);
 
 	LongInt result, excpectation;
 
 	excpectation.setValue(10000);
-	result.setValue(value1.multiplication(value2));
+	result.setValue(value1.mult(value2));
 
 	if (result.compare(excpectation) != 0)//если 100*100 не равно 10000
 		throw exception("Bad multiplication");
@@ -219,7 +219,7 @@ void LongIntTests::multiplicate()//тестирование умножения �
 	value2.setValue(-100);
 	excpectation.setValue(10000);
 
-	result.setValue(value1.multiplication(value2));
+	result.setValue(value1.mult(value2));
 
 	if (result.compare(excpectation) != 0)//если (-100)*(-100) не равно 10000
 		throw exception("Bad multiplication");
@@ -228,7 +228,7 @@ void LongIntTests::multiplicate()//тестирование умножения �
 	value2.setValue(100);
 	excpectation.setValue(-10000);
 
-	result.setValue(value1.multiplication(value2));
+	result.setValue(value1.mult(value2));
 
 	if (result.compare(excpectation) != 0)//если (-100)*100 не равно -10000
 		throw exception("Bad multiplication");
@@ -237,7 +237,7 @@ void LongIntTests::multiplicate()//тестирование умножения �
 	value2.setValue(-100);
 	excpectation.setValue(-10000);
 
-	result.setValue(value1.multiplication(value2));
+	result.setValue(value1.mult(value2));
 
 	if (result.compare(excpectation) != 0)//если 100*(-100) не равно -10000
 		throw exception("Bad multiplication");
@@ -251,7 +251,7 @@ void LongIntTests::div()
 	LongInt result, excpectation;
 
 	excpectation.setValue(1);
-	result.setValue(value1.division(value2));
+	result.setValue(value1.div(value2));
 
 	if (result.compare(excpectation) != 0)
 		throw exception("Bad division");
@@ -260,7 +260,7 @@ void LongIntTests::div()
 	value2.setValue(-100);
 	excpectation.setValue(1);
 
-	result.setValue(value1.division(value2));
+	result.setValue(value1.div(value2));
 
 	if (result.compare(excpectation) != 0)
 		throw exception("Bad division");
@@ -269,7 +269,7 @@ void LongIntTests::div()
 	value2.setValue(100);
 	excpectation.setValue(-1);
 
-	result.setValue(value1.division(value2));
+	result.setValue(value1.div(value2));
 
 	if (result.compare(excpectation) != 0)
 		throw exception("Bad division");
@@ -278,8 +278,136 @@ void LongIntTests::div()
 	value2.setValue(-100);
 	excpectation.setValue(-1);
 
-	result.setValue(value1.division(value2));
+	result.setValue(value1.div(value2));
 
 	if (result.compare(excpectation) != 0)
 		throw exception("Bad division");
+}
+void LongIntTests::multByTenInPowerOperator()
+{
+	LongInt value(123);
+	int n = 4;
+
+	LongInt result, excpectation;
+
+	excpectation.setValue(1230000);
+	result.setValue(value * n);
+
+	//если 123*(10^4) не равно 1230000
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad multiply operator");
+
+	//пробуем поменять местами операнды
+	result.setValue(n * value);
+
+	//если 123*(10^4) не равно 1230000
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad multiply operator");
+}
+
+void LongIntTests::divByTenInPowerOperator()
+{
+	LongInt value(12345);
+	int n = 5;
+
+	LongInt result, excpectation;
+
+	excpectation.setValue(0);
+	result.setValue(value / n);
+
+	//если 12345/(10^5) не равно 0
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad div operator");
+
+	n = 3;
+	excpectation.setValue(12);
+	result.setValue(value / n);
+
+	//если 12345/(10^3) не равно 12
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad div operator");
+}
+
+void LongIntTests::assignmentOperator()
+{
+	LongInt value(123);
+
+	LongInt result, excpectation;
+
+	excpectation.setValue(123);
+	result = value;
+
+	//если числа не равны
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad assignment operator");
+
+}
+
+void LongIntTests::staticCastOperator()
+{
+	LongInt value(123);
+
+	unsigned long int excpectation = 123;
+	unsigned long int result = static_cast<unsigned long int>(value);
+
+	if (excpectation != result)
+		throw exception("Bad cast operator");
+}
+
+//Лабораторная работа 3
+
+void LongIntTests::fileInputOutput()
+{
+	int valueNums[] = { 1,2,3 };
+
+	LongInt value(3, valueNums, false), value2;
+
+	ofstream output("test.txt");
+	output << value;
+	output.close();
+
+	ifstream input("test.txt");
+	input >> value2;
+	input.close();
+
+	if (value2.getIsNegative())
+		throw exception("Bad sign");
+
+	if (value2.getLength() != 3)
+		throw exception("Bad length");
+
+	int* nums = value2.getNumbers();
+	for (int i = 0; i < 3; i++)
+		if (valueNums[i] != nums[i])
+			throw exception("Bad nums");
+
+	delete[] nums;
+}
+
+void LongIntTests::binaryInputOutput()
+{
+	int valueNums[] = { 1,2,3 };
+
+	LongInt value(3, valueNums, false), value2;
+
+	fstream output("test.bin", ios::out | ios::trunc | ios::binary);
+	value.write(output);
+	output.close();
+
+	fstream input("test.bin", ios::in | ios::binary);
+	value2.read(input);
+	input.close();
+
+	if (value2.getIsNegative())
+		throw exception("Bad sign");
+
+	if (value2.getLength() != 3)
+		throw exception("Bad length");
+
+	int* nums = value2.getNumbers();
+	for (int i = 0; i < 3; i++)
+		if (valueNums[i] != nums[i])
+			throw exception("Bad nums");
+
+	delete[] nums;
 }

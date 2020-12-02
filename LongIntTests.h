@@ -18,11 +18,29 @@ public:
 
 	void add();
 
-	void subtract();
+	void sub();
 
-	void multiplicate();
+	void mult();
 
 	void div();
+
+	//лабораторная работа 2:
+
+	void multByTenInPowerOperator();
+
+	void divByTenInPowerOperator();
+
+	void assignmentOperator();
+
+	void staticCastOperator();//тестирование приведения к unsigned long int
+
+	
+	//лабораторная работа 3:
+
+	void fileInputOutput();
+
+	void binaryInputOutput();
+
 
 };
 

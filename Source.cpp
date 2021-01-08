@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 #include "LongIntTests\LongIntTests.h"
 
@@ -6,19 +7,9 @@ using namespace std;
 
 int main()
 {
-	LongInt obj1(-10230), obj2(133000);
-
-	cout << obj1.add(obj2).toString() << endl;
-
-	cout << obj1.subtract(obj2).toString() << endl;
-
-	cout << obj1.multiplicate(obj2).toString() << endl;
-
-	cout << obj1.div(obj2).toString() << endl;
-
-
+	
+	
 	LongIntTests tester;
-
 
 	try
 	{
@@ -76,7 +67,7 @@ int main()
 
 	try
 	{
-		tester.subtract();
+		tester.sub();
 	}
 	catch (const std::exception& exc)
 	{
@@ -85,7 +76,7 @@ int main()
 
 	try
 	{
-		tester.multiplicate();
+		tester.mult();
 	}
 	catch (const std::exception& exc)
 	{
@@ -101,8 +92,67 @@ int main()
 		cout << exc.what() << endl;
 	}
 
+	//Лабораторная работа 2
 
+	try
+	{
+		tester.multByTenInPowerOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
 
+	try
+	{
+		tester.divByTenInPowerOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.assignmentOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.staticCastOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	//Лабораторная работа 3
+
+	try
+	{
+		tester.fileInputOutput();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.binaryInputOutput();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+	
+	cout << "Press any key" << endl;
+	char c;
+	cin >> c;
 
 	return 0;
 }

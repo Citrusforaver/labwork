@@ -7,11 +7,11 @@ using namespace std;
 LongInt::LongInt()
 {
 	_numbers = nullptr;//устанавливаем нулевой указатель вместо массива для того, чтобы в сеттере не было проблем с очисткой памяти
-
+	
 	setValue(0);
 }
 
-LongInt::LongInt(int value)
+LongInt::LongInt(long long int value)
 {
 	_numbers = nullptr;
 	setValue(value);
@@ -54,7 +54,7 @@ bool LongInt::getIsNegative()//геттер для того, чтобы узна
 }
 
 
-void LongInt::setValue(int value)//сеттер для числа
+void LongInt::setValue(long long int value)//сеттер для числа
 {
 	delete[] _numbers;
 
@@ -110,14 +110,14 @@ void LongInt::setIsNegative(bool is_negative)//изменение знака ч�
 }
 
 
-LongInt LongInt::add(LongInt& value)//сложение
+LongInt LongInt::add( LongInt& value)//сложение
 {
 	if (!_isNegative && value._isNegative)
 	{
 		LongInt obj(value);
 		obj.setIsNegative(false);
 
-		return subtract(obj);
+		return sub(obj);
 	}
 
 	if (_isNegative && !value._isNegative)
@@ -125,12 +125,12 @@ LongInt LongInt::add(LongInt& value)//сложение
 		LongInt obj(*this);
 		obj.setIsNegative(false);
 
-		return value.subtract(obj);
+		return value.sub(obj);
 	}
 
 	int* numbers;
 	int length;
-
+	
 	if (_length >= value._length)
 	{
 		length = _length;
@@ -138,7 +138,7 @@ LongInt LongInt::add(LongInt& value)//сложение
 		for (int i = 0; i < _length; i++)
 			numbers[i] = _numbers[i];
 
-		int  i = _length - 1;
+		int  i= _length - 1;
 		for (int j = value._length - 1; j >= 0; j--)
 			numbers[i--] += value._numbers[j];
 	}
@@ -154,8 +154,8 @@ LongInt LongInt::add(LongInt& value)//сложение
 			numbers[i--] += _numbers[j];
 	}
 
-	int* norm_numbers = normalize(length, numbers);
-	LongInt result(length, norm_numbers, _isNegative);
+	int * norm_numbers = normalize(length, numbers);
+	LongInt result(length, norm_numbers,_isNegative);
 
 	delete[] norm_numbers;
 	delete[] numbers;
@@ -163,7 +163,7 @@ LongInt LongInt::add(LongInt& value)//сложение
 	return result;
 }
 
-LongInt LongInt::subtract(LongInt& value)//вычитание
+LongInt LongInt::sub(LongInt& value)//вычитание
 {
 	if (!compare(value))
 		return LongInt();
@@ -186,7 +186,7 @@ LongInt LongInt::subtract(LongInt& value)//вычитание
 
 	if (compare(value) < 0)
 	{
-		LongInt result(value.subtract(*this));
+		LongInt result(value.sub(*this));
 
 		result.setIsNegative(!result.getIsNegative());
 
@@ -228,12 +228,12 @@ LongInt LongInt::subtract(LongInt& value)//вычитание
 	return result;
 }
 
-LongInt LongInt::multiplicate(LongInt& value)//умножение
+LongInt LongInt::mult( LongInt& value)//умножение
 {
 	LongInt result;
 
-	int multiplier = 1;
-	for (int i = value._length - 1; i >= 0; i--)
+	int multiplier = 1;	
+	for (int i = value._length - 1; i >=0; i--)
 	{
 		LongInt temp(*this);
 		temp.setIsNegative(false);
@@ -252,7 +252,7 @@ LongInt LongInt::multiplicate(LongInt& value)//умножение
 
 LongInt LongInt::div(LongInt& value)//деление
 {
-
+	
 	LongInt divider(0);
 	if (!value.compare(divider))
 		throw exception("Division by zero!");
@@ -263,16 +263,16 @@ LongInt LongInt::div(LongInt& value)//деление
 	LongInt dividend;
 	dividend.setValue(*this);
 	dividend.setIsNegative(false);
-
+	
 	int result_number = 0;
 	while (dividend.compare(divider) >= 0)
 	{
-		dividend.setValue(dividend.subtract(divider));
+		dividend.setValue(dividend.sub(divider));
 		result_number++;
 	}
 
 	if ((_isNegative && !value._isNegative) || (!_isNegative && value._isNegative))
-		result_number *= -1;
+		result_number*=-1;
 
 	return LongInt(result_number);
 }
@@ -282,10 +282,10 @@ int LongInt::compare(LongInt& value)//сравнение
 {
 	if (_isNegative && !value._isNegative)
 		return -1;
-
+	
 	if (!_isNegative && value._isNegative)
 		return 1;
-
+	
 	if (_length > value._length)
 		if (_isNegative)
 			return -1;
@@ -341,13 +341,16 @@ char* LongInt::toString()//получение стрового представ�
 }
 
 
-int* LongInt::intToArray(int value)//перевод числа в массив цифр
+int* LongInt::intToArray(long long int value)
 {
+	//сначала избавляемся от минуса
 	if (value < 0)
 		value *= -1;
 
+	//если на вход пришел ноль
 	if (!value)
 	{
+		//то его и возвращаем
 		int* numbers = new int[2];
 		numbers[0] = 0;
 		numbers[1] = -1;
@@ -355,15 +358,17 @@ int* LongInt::intToArray(int value)//перевод числа в массив �
 		return numbers;
 	}
 
-	int temp = value;
+	long long int temp = value;
 	int count = 0;
 
+	//иначе - считаем кол-во цифр числа
 	while (temp)
 	{
 		temp /= 10;
 		count++;
 	}
 
+	//создаем массив и заполняем его цифрами числа
 	int* numbers = new int[count + 1];
 	temp = value;
 	for (int i = 0; i < count; i++)
@@ -376,48 +381,166 @@ int* LongInt::intToArray(int value)//перевод числа в массив �
 	return numbers;
 }
 
-int* LongInt::normalize(int& length, int* numbers)//нормализация массива
+
+//Лабораторная работа 2
+
+LongInt LongInt::operator+(LongInt value)//оператор сложения чисел
 {
-	int* result = new int[length];
-	for (int i = 0; i < length; i++)
-		result[i] = numbers[i];
+	return add(value);
+}
 
-	for (int i = length - 1; i >= 1; i--)
-		if (result[i] < 0)
-		{
-			result[i - 1]--;
-			result[i] += 10;
-		}
+LongInt LongInt::operator-(LongInt value)//оператор вычитания чисел
+{
+	return sub(value);
+}
 
-	while (!result[0] && (length != 1))
-	{
-		int* new_result = new int[length - 1];
-		for (int i = 1; i < length; i++)
-			new_result[i - 1] = result[i];
+LongInt LongInt::operator*(int n)//умножение на 10^n
+{
+	if (n < 0)
+		throw exception("Bad number!");
 
-		length--;
-		delete[] result;
-		result = new_result;
-	}
+	//переносим все цифры из числа в массив цифр результирующего числа
+	int newLength = _length + n;
+	int* newNumbers = new int[newLength];
+	for (int i = 0; i < _length; i++)
+		newNumbers[i] = _numbers[i];
+	//в конец числа записываем n нулей
+	for (int i = _length; i < newLength; i++)
+		newNumbers[i] = 0;
 
-	for (int i = length - 1; i >= 1; i--)
-	{
-		result[i - 1] += result[i] / 10;
-		result[i] %= 10;
-	}
-
-	while (result[0] >= 10)
-	{
-		int* new_result = new int[length + 1];
-		for (int i = length - 1; i >= 0; i--)
-			new_result[i + 1] = result[i];
-
-		new_result[0] = new_result[1] / 10;
-		new_result[1] %= 10;
-		length++;
-		delete[] result;
-		result = new_result;
-	}
+	//формируем число из массива цифр и новой длины
+	LongInt result(newLength, newNumbers, _isNegative);
+	delete[] newNumbers;
 
 	return result;
+}
+
+LongInt operator*(int n, LongInt value)//умножение на 10^n
+{
+	if (n < 0)
+		throw exception("Bad number!");
+
+	int newLength = value._length + n;//переносим все цифры из числа в массив цифр результирующего числа
+	int* newNumbers = new int[newLength];
+	for (int i = 0; i < value._length; i++)
+		newNumbers[i] = value._numbers[i];
+
+	for (int i = value._length; i < newLength; i++)
+		newNumbers[i] = 0;
+}
+
+LongInt LongInt::operator/(int n)//деление на 10^n
+{
+	if (n < 0)
+		throw exception("Bad number!");
+
+	if (n >= _length)
+		return LongInt(0);
+
+	int newLength = _length - n;
+	int* newNumbers = new int[newLength];
+	for (int i = 0; i < newLength; i++)
+		newNumbers[i] = _numbers[i];
+
+	LongInt result(newLength, newNumbers, _isNegative);
+	delete[] newNumbers;
+
+	return result;
+}
+
+LongInt& LongInt::operator=(const LongInt& value)//оператор присваивания
+{
+	setValue(value);
+
+	return *this;
+}
+
+
+LongInt::operator unsigned long int()//оператор приведения типов
+{
+
+	LongInt maxULong(ULONG_MAX);
+
+	if (compare(maxULong) > 0)
+		throw exception("Overflow");
+
+	unsigned long int result = 0, tenDegree = pow(10, (_length - 1));
+	for (int i = 0; i < _length; i++, tenDegree /= 10)
+		result += _numbers[i] * tenDegree;
+
+	return result;
+}
+
+//Лабораторная работа 3
+
+
+ostream& operator<<(ostream& stream, LongInt& value)//данные операторы работают как с обычными потоками, так и с файловыми
+{
+	stream << value.toString();//выводим в поток строковое представление числа
+
+	return stream;
+}
+
+istream& operator>>(istream& stream, LongInt& value)//чтение с обычного потока
+{
+	int length;
+	int* numbers;
+	bool isNegative;
+
+	char* numberStr = new char[1024];//считываем из потока строковое представление числа
+	stream.getline(numberStr, 1024);
+
+	if (numberStr[0] == '-')//если считывается отрицательное число
+	{
+		isNegative = true;
+		length = strlen(numberStr) - 1;
+		numbers = new int[length];
+
+		for (int i = 1; i < length; i++)
+			numbers[i] = numberStr[i] - '0';
+	}
+	else
+	{
+		isNegative = false;
+		length = strlen(numberStr);
+		numbers = new int[length];
+
+		for (int i = 0; i < length; i++)
+			numbers[i] = numberStr[i] - '0';
+	}
+
+	value.setValue(length, numbers, isNegative);
+
+	delete[] numbers;
+
+	return stream;
+}
+
+void LongInt::write(fstream& file)//запись в бинарный файл
+{
+	if (!file.is_open())
+		throw exception("File is closed!");
+
+	file.write((char*)&_isNegative, sizeof(bool));
+	file.write((char*)&_length, sizeof(int));
+	for (int i = 0; i < _length; i++)
+		file.write((char*)&_numbers[i], sizeof(int));
+}
+
+void LongInt::read(fstream& file)//чтение из бинарного файла
+{
+	if (!file.is_open())
+		throw exception("File is closed!");
+
+	int length;
+	bool isNegative;
+	int* numbers;
+
+	file.read((char*)&isNegative, sizeof(bool));
+	file.read((char*)&length, sizeof(int));
+	numbers = new int[length];
+	for (int i = 0; i < length; i++)
+		file.read((char*)&numbers[i], sizeof(int));
+
+	setValue(length, numbers, isNegative);
 }

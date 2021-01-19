@@ -3,6 +3,7 @@
 #include "LongIntTests\LongIntTests.h"
 #include "LongDoubleTests/LongDoubleTests.h"
 #include "UnsignedLongIntTests/UnsignedLongIntTests.h"
+#include "DequeTests/DequeTests.h"
 
 using namespace std;
 
@@ -309,6 +310,49 @@ int main()
 	cout << endl;
 	
 }
+
+	{
+		cout << "Deque tests:" << endl;
+
+		DequeTests tester;
+
+		try
+		{
+			tester.pushPop();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.pushPopIndex();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.search();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.polymorphism();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+		cout << endl;
+	}
 
 	cout << "Press any key" << endl;
 	char c;

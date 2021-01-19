@@ -24,7 +24,33 @@ public:
 
 	void div();
 
+//лабораторная работа 2:
+
+	//тестировать операторы сложения и вычитания нет смысла, т.к. они основаны на соответствующих арифметических операциях
+
+	//тестирование *
+	void multByTenInPowerOperator();
+
+	//тестирование /
+	void divByTenInPowerOperator();
+
+	//тестирование =
+	void assignmentOperator();
+
+	//тестирование приведения к unsigned long int
+	void staticCastOperator();
+
+
+
+	//лабораторная работа 3:
+
+	void fileInputOutput();
+
+	void binaryInputOutput();
+
 };
+
+
 
 
 

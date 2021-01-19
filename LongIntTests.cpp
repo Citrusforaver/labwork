@@ -283,3 +283,129 @@ void LongIntTests::div()
 	if (result.compare(excpectation) != 0)
 		throw exception("Bad division");
 }
+oid LongIntTests::multByTenInPowerOperator()
+{
+	LongInt value(123);
+	int n = 4;
+
+	LongInt result, excpectation;
+
+	excpectation.setValue(1230000);
+	result.setValue(value*n);
+
+	//если 123*(10^4) не равно 1230000
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad multiply operator");
+
+	//пробуем поменять местами операнды
+	result.setValue(n * value);
+
+	//если 123*(10^4) не равно 1230000
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad multiply operator");
+}
+
+void LongIntTests::divByTenInPowerOperator()
+{
+	LongInt value(12345);
+	int n = 5;
+
+	LongInt result, excpectation;
+
+	excpectation.setValue(0);
+	result.setValue(value / n);
+
+	//если 12345/(10^5) не равно 0
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad div operator");
+
+	n = 3;
+	excpectation.setValue(12);
+	result.setValue(value / n);
+
+	//если 12345/(10^3) не равно 12
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad div operator");
+}
+
+void LongIntTests::assignmentOperator()
+{
+	LongInt value(123);
+
+	LongInt result, excpectation;
+
+	excpectation.setValue(123);
+	result = value;
+
+	//если числа не равны
+	if (result.compare(excpectation) != 0)
+		throw exception("Bad assignment operator");
+
+}
+
+void LongIntTests::staticCastOperator()
+{
+	LongInt value(123);
+
+	unsigned long int excpectation = 123;
+	unsigned long int result = static_cast<unsigned long int>(value);
+
+	if (excpectation != result)
+		throw exception("Bad cast operator");
+}
+
+void LongIntTests::fileInputOutput()
+{
+	int valueNums[] = { 1,2,3 };
+
+	LongInt value(3, valueNums, false), value2;
+
+	ofstream output("test.txt");
+	output << value;
+	output.close();
+
+	ifstream input("test.txt");
+	input >> value2;
+	input.close();
+
+	if (value2.getIsNegative())
+		throw exception("Bad sign");
+
+	if (value2.getLength() != 3)
+		throw exception("Bad length");
+
+	int* nums = value2.getNumbers();
+	for (int i = 0; i < 3; i++)
+		if (valueNums[i] != nums[i])
+			throw exception("Bad nums");
+
+	delete[] nums;
+}
+
+void LongIntTests::binaryInputOutput()
+{
+	int valueNums[] = { 1,2,3 };
+
+	LongInt value(3, valueNums, false), value2;
+
+	fstream output("test.bin",ios::out | ios::trunc | ios::binary);
+	value.write(output);
+	output.close();
+
+	fstream input("test.bin",ios::in | ios::binary);
+	value2.read(input);
+	input.close();
+
+	if (value2.getIsNegative())
+		throw exception("Bad sign");
+
+	if (value2.getLength() != 3)
+		throw exception("Bad length");
+
+	int* nums = value2.getNumbers();
+	for (int i = 0; i < 3; i++)
+		if (valueNums[i] != nums[i])
+			throw exception("Bad nums");
+
+	delete[] nums;
+}

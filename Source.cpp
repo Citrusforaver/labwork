@@ -1,24 +1,145 @@
 
 #include <iostream>
 #include "LongIntTests\LongIntTests.h"
+#include "LongDoubleTests/LongDoubleTests.h"
+#include "UnsignedLongIntTests/UnsignedLongIntTests.h"
 
 using namespace std;
 
 int main()
 {
-	LongInt obj1(-10230), obj2(133000);
 
-	cout << obj1.add(obj2).toString() << endl;
+	{
+		cout << "LongInt tests:" << endl;
 
-	cout << obj1.subtract(obj2).toString() << endl;
+		LongIntTests tester;
 
-	cout << obj1.multiplicate(obj2).toString() << endl;
+		try
+		{
+			tester.setValueWithValue();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
 
-	cout << obj1.div(obj2).toString() << endl;
+		try
+		{
+			tester.setValueWithArray();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
 
+		try
+		{
+			tester.compare();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
 
-	LongIntTests tester;
+		try
+		{
+			tester.add();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
 
+		try
+		{
+			tester.sub();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.mult();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.div();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		//Лабораторная работа 2
+
+		try
+		{
+			tester.multByTenInPowerOperator();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.divByTenInPowerOperator();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.assignmentOperator();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.staticCastOperator();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		//Лабораторная работа 3
+
+		try
+		{
+			tester.fileInputOutput();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+
+		try
+		{
+			tester.binaryInputOutput();
+		}
+		catch (const std::exception& exc)
+		{
+			cout << exc.what() << endl;
+		}
+		cout << endl;
+	}
+
+	cout << "UnsignedLongInt Tests:" << endl;
+	{
+	UnsignedLongIntTests tester;
 
 	try
 	{
@@ -32,24 +153,6 @@ int main()
 	try
 	{
 		tester.setValueWithArray();
-	}
-	catch (const std::exception& exc)
-	{
-		cout << exc.what() << endl;
-	}
-
-	try
-	{
-		tester.setValueWithLongInt();
-	}
-	catch (const std::exception& exc)
-	{
-		cout << exc.what() << endl;
-	}
-
-	try
-	{
-		tester.toString();
 	}
 	catch (const std::exception& exc)
 	{
@@ -76,7 +179,7 @@ int main()
 
 	try
 	{
-		tester.subtract();
+		tester.sub();
 	}
 	catch (const std::exception& exc)
 	{
@@ -85,7 +188,7 @@ int main()
 
 	try
 	{
-		tester.multiplicate();
+		tester.mult();
 	}
 	catch (const std::exception& exc)
 	{
@@ -101,8 +204,115 @@ int main()
 		cout << exc.what() << endl;
 	}
 
+	//Лабораторная работа 2
 
+	try
+	{
+		tester.multByTenInPowerOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
 
+	try
+	{
+		tester.divByTenInPowerOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.assignmentOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.staticCastOperator();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	//Лабораторная работа 3
+
+	try
+	{
+		tester.fileInputOutput();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.binaryInputOutput();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	cout << endl;
+}
+
+	{
+	cout << "LongDouble tests:" << endl;
+
+	LongDoubleTests tester;
+
+	try
+	{
+		tester.setValueWithValue();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.setValueWithArray();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.fileInputOutput();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+
+	try
+	{
+		tester.binaryInputOutput();
+	}
+	catch (const std::exception& exc)
+	{
+		cout << exc.what() << endl;
+	}
+	
+	cout << endl;
+	
+}
+
+	cout << "Press any key" << endl;
+	char c;
+	cin >> c;
 
 	return 0;
 }

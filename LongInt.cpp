@@ -421,3 +421,199 @@ int* LongInt::normalize(int& length, int* numbers)//нормализация м�
 
 	return result;
 }
+//Лабораторная работа 2
+
+//оператор сложения чисел
+LongInt LongInt::operator+(LongInt value)
+{
+	return add(value);
+}
+
+//оператор вычитания чисел
+LongInt LongInt::operator-(LongInt value)
+{
+	return sub(value);
+}
+
+//умножение на 10^n
+LongInt LongInt::operator*(int n)
+{
+	if (n < 0)
+		throw exception("Bad number!");
+
+	//переносим все цифры из числа в массив цифр результирующего числа
+	int newLength = _length + n;
+	int* newNumbers = new int[newLength];
+	for (int i = 0; i < _length; i++)
+		newNumbers[i] = _numbers[i];
+	//в конец числа записываем n нулей
+	for (int i = _length; i < newLength; i++)
+		newNumbers[i] = 0;
+
+	//формируем число из массива цифр и новой длины
+	LongInt result(newLength, newNumbers, _isNegative);
+	delete[] newNumbers;
+
+	return result;
+}
+
+//умножение на 10^n
+LongInt operator*(int n, LongInt value)
+{
+	if (n < 0)
+		throw exception("Bad number!");
+
+	//переносим все цифры из числа в массив цифр результирующего числа
+	int newLength = value._length + n;
+	int* newNumbers = new int[newLength];
+	for (int i = 0; i < value._length; i++)
+		newNumbers[i] = value._numbers[i];
+	//в конец числа записываем n нулей
+	for (int i = value._length; i < newLength; i++)
+		newNumbers[i] = 0;
+
+	//формируем число из массива цифр и новой длины
+	LongInt result(newLength, newNumbers, value._isNegative);
+	delete[] newNumbers;
+
+	return result;
+}
+
+//деление на 10^n
+LongInt LongInt::operator/(int n)
+{
+	//реализуется ЦЕЛОЧИСЛЕННОЕ деление
+
+	if (n < 0)
+		throw exception("Bad number!");
+
+	//если делитель больше самого числа
+	if (n >= _length)
+		//то возвращаем 0
+		return LongInt(0);
+
+	//переносим первые _length-n цифр числа в результат
+	int newLength = _length -n;
+	int* newNumbers = new int[newLength];
+	for (int i = 0; i < newLength; i++)
+		newNumbers[i] = _numbers[i];
+
+	//формируем число из массива цифр и новой длины
+	LongInt result(newLength, newNumbers, _isNegative);
+	delete[] newNumbers;
+
+	return result;
+}
+
+//оператор присваивания
+LongInt& LongInt::operator=(const LongInt& value)
+{
+	setValue(value._length, value._numbers, value._isNegative);
+
+	return *this;
+}
+
+//оператор приведения типов
+LongInt::operator unsigned long int()
+{
+	//создаем длинное число, равное максимальному числу среди unsigned long int
+	LongInt maxULong(ULONG_MAX);
+
+	//если текущее число меньше максимального
+	if (compare(maxULong) > 0)
+		throw exception("Overflow");
+
+	//то переводим длинное число из массива цифр в числовой формат
+	unsigned long int result = 0, tenDegree = pow(10, (_length - 1));
+	for (int i = 0; i < _length; i++, tenDegree /= 10)
+		result += _numbers[i] * tenDegree;
+
+	//и возвращаем его
+	return result;
+}
+
+//------Лабораторная работа 3
+
+
+//данные операторы работают как с обычными потоками, так и с файловыми
+//вывод в обычный поток
+ostream& operator<<(ostream& stream, LongInt& value)
+{
+	if (value._isNegative)
+		stream << '-';
+
+	//выводим в поток строковое представление числа
+	for (int i = 0; i < value._length; i++)
+		stream << value._numbers[i];
+
+	return stream;
+}
+
+//чтение с обычного потока
+istream& operator>>(istream& stream, LongInt& value)
+{
+	int length;
+	int* numbers;
+	bool isNegative;
+
+	//считываем из потока строковое представление числа
+	char* numberStr = new char[1024];
+	stream.getline(numberStr, 1024);
+
+	//если считывается отрицательное число
+	if (numberStr[0] == '-')
+	{
+		isNegative = true;
+		length = strlen(numberStr) - 1;
+		numbers = new int[length];
+
+		for (int i = 0; i < length; i++)
+			numbers[i] = numberStr[i+1] - '0';
+	}
+	else
+	{
+		isNegative = false;
+		length = strlen(numberStr);
+		numbers = new int[length];
+
+		for (int i = 0; i < length; i++)
+			numbers[i] = numberStr[i] - '0';
+	}
+
+	value.setValue(length, numbers, isNegative);
+
+	delete[] numbers;
+
+	return stream;
+}
+
+//запись в бинарный файл
+void LongInt::write(fstream& file)
+{
+	if (!file.is_open())
+		throw exception("File is closed!");
+
+	file.write((char*)&_isNegative, sizeof(bool));
+	file.write((char*)&_length, sizeof(int));
+	for (int i = 0; i < _length; i++)
+		file.write((char*)&_numbers[i], sizeof(int));
+}
+
+//чтение из бинарного файла
+void LongInt::read(fstream& file)
+{
+	if (!file.is_open())
+		throw exception("File is closed!");
+
+	int length;
+	bool isNegative;
+	int* numbers;
+
+	file.read((char*)&isNegative, sizeof(bool));
+	file.read((char*)&length, sizeof(int));
+	numbers = new int[length];
+	for (int i = 0; i < length; i++)
+		file.read((char*)&numbers[i], sizeof(int));
+
+	setValue(length, numbers, isNegative);
+}

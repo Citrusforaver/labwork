@@ -16,8 +16,5 @@ public:
 	//тест поиска 
 	void search();
 
-	//тест динамического полиморфизма
-	void polymorphism();
-
 };
 
